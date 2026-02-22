@@ -262,4 +262,55 @@ footer {
 @media (max-width: 768px) {
     .grid-progetti { grid-template-columns: 1fr; }
     .profile-header { justify-content: center; text-align: center; }
+
+}
+
+/* Stile per le immagini nei dettagli dei progetti */
+.project-img {
+    max-width: 100%;    /* Impedisce all'immagine di uscire dallo schermo */
+    height: auto;       /* Mantiene le proporzioni */
+    display: block;
+    margin: 20px auto;  /* Le centra con un po' di spazio sopra e sotto */
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.code-box {
+    max-width: 100%;     /* Forza il box a stare dentro i bordi del telefono */
+    overflow-x: auto;    /* Se il codice è lungo, aggiunge una barra di scorrimento interna */
+    white-space: pre;    /* Mantiene la formattazione del codice */
+    word-wrap: normal;
+    font-size: 14px;     /* Riduce leggermente il testo per farlo stare meglio */
+    padding: 15px;
+    background-color: #0d1117;
+    border-radius: 8px;
+}
+
+/* --- OTTIMIZZAZIONI PER MOBILE --- */
+@media (max-width: 768px) {
+    /* Riduce lo spazio ai lati del sito */
+    .container {
+        padding: 0 15px;
+    }
+
+    /* Fa sì che i progetti stiano uno sotto l'altro in colonna */
+    .grid-progetti {
+        grid-template-columns: 1fr !important; 
+    }
+
+    /* Riduce la dimensione dei titoli grandi */
+    #hero h2 {
+        font-size: 1.8rem;
+    }
+
+    /* La foto profilo si rimpicciolisce un po' */
+    .profile-pic {
+        width: 180px;
+        height: 180px;
+    }
+
+    /* Rimuove i margini forzati se avevi usato la classe card-center */
+    .card-center {
+        grid-column: auto !important;
+    }
 }
