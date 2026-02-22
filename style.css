@@ -292,6 +292,7 @@ footer {
     background: none;
     border: none;
     z-index: 1001;
+    padding: 5px;
 }
 
 .hamburger span {
@@ -299,7 +300,21 @@ footer {
     width: 25px;
     height: 3px;
     background-color: var(--text-color);
-    transition: 0.3s;
+    transition: all 0.3s ease-in-out; /* Transizione fluida per l'animazione */
+}
+
+/* --- ANIMAZIONE X (Quando ha la classe .open) --- */
+.hamburger.open span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-20px);
+}
+
+.hamburger.open span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
 }
 
 /* --- RESPONSIVE HEADER (MOBILE) --- */
@@ -335,4 +350,5 @@ footer {
         font-size: 1.2rem;
     }
 }
+
 
