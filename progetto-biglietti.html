@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Biglietti | Dettagli</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1><a href="index.html" style="text-decoration:none; color:inherit;">DevStudent<span>.</span></a></h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><button id="theme-toggle" style="background:none; border:none; cursor:pointer; font-size:1.2rem;">☀️</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="container" style="padding: 50px 0;">
+        <h2 style="font-size: 2.5rem; margin-bottom: 10px;">E-Commerce Biglietti</h2>
+        <div class="tags" style="margin-bottom: 30px;">
+            <span>JavaScript</span> <span>MySQL</span> <span>Eclipse</span>
+        </div>
+
+        <div class="project-details">
+            <h3>Il Problema</h3>
+            <p>La necessità era creare un sistema che gestisse non solo la vendita, ma anche la logica di raggruppamento di utenti che acquistano biglietti per uno stesso evento. In questo modo chiunque può creare un gruppo o entrare come membro in un gruppo già esistente riguardante l'evento di cui possiede il biglietto. All'interno del gruppo è poi possibile chattare con gli altri membri per rendere possibile l'organizzazione tra di essi direttamente in loco.</p>
+            
+            <br>
+            
+            <h3>Codice Java</h3>
+            <p>Qui è possibile scaricare il file java del progetto per poterne prendere visione:</p>
+            <a href="src.zip/" download class="btn" style="margin-top: 10px; display:inline-block;">
+                💾 Scarica File Sorgente
+            </a>
+
+
+            <h3 style="margin-top: 60px;">1. Struttura Database (Schema)</h3>
+            <p>Codice SQL per la creazione delle tabelle:</p>
+            
+            <pre class="code-box"><code>
+CREATE DATABASE TT;
+USE TT;
+
+CREATE TABLE Utenti (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    data_creazione TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ruolo VARCHAR(50)
+);
+
+
+CREATE TABLE Eventi (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    descrizione TEXT,
+    data_evento DATETIME NOT NULL,
+    luogo VARCHAR(100),
+    organizzatore_id INT,
+    prezzo DECIMAL(10, 2),
+    FOREIGN KEY (organizzatore_id) REFERENCES Utenti(id)
+);
+
+
+CREATE TABLE Gruppi (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome_gruppo VARCHAR(100) NOT NULL,
+    descrizione TEXT,
+    creatore_id INT,
+    evento_id INT, 
+    FOREIGN KEY (creatore_id) REFERENCES Utenti(id),
+    FOREIGN KEY (evento_id) REFERENCES Eventi(id)  -- Collegamento con Eventi
+);
+
+
+CREATE TABLE Membri (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    gruppo_id INT,
+    utente_id INT,
+    ruolo VARCHAR(50),  -- Ad esempio "organizzatore", "membro"
+    FOREIGN KEY (gruppo_id) REFERENCES Gruppi(id),
+    FOREIGN KEY (utente_id) REFERENCES Utenti(id)
+);
+
+CREATE TABLE Bacheca (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    gruppo_id INT,
+    utente_id INT,
+    messaggio TEXT NOT NULL,
+    data_pubblicazione TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (gruppo_id) REFERENCES Gruppi(id),
+    FOREIGN KEY (utente_id) REFERENCES Utenti(id)
+);
+            </code></pre>
+
+
+            <h3 style="margin-top: 40px;">2. Popolamento Database</h3>
+            <p>Codice SQL per l'inserimento dei dati di test (esempi):</p>
+
+            <pre class="code-box"><code>
+USE TT;
+
+INSERT INTO Utenti (id, username, password, ruolo) VALUES
+(1, 'marioRossi', 'password123', 'utente'),
+(2, 'annaBianchi', 'securepass', 'utente'),
+(14, 'fede', 'fede', 'admin');
+
+INSERT INTO Eventi (nome, descrizione, data_evento, luogo, organizzatore_id, prezzo) VALUES
+('Concerto Rock', 'Una serata di grande musica rock!', '2025-03-15 20:00:00', 'Milano Arena', 1, 100),
+('Festival del Cinema', 'Proiezioni di film indipendenti.', '2025-04-10 18:30:00', 'Roma Cineplex', 2, 12),
+('Concerto Jazz', 'Serata di musica jazz con artisti internazionali.', '2025-03-20 21:00:00', 'Blue Note, Milano', 3, 85);
+
+INSERT INTO Gruppi (nome_gruppo, descrizione, creatore_id, evento_id) VALUES 
+('Rock Fans', 'Gruppo di appassionati di musica rock.', 1, 1),
+('Cinema Lovers', 'Discutiamo dei film del Festival del Cinema.', 2, 2),
+('Jazz Club', 'Amanti del jazz, unitevi!', 3, 3);
+
+INSERT INTO Membri (gruppo_id, utente_id, ruolo) VALUES 
+(1, 1, 'organizzatore'),
+(1, 3, 'membro'),
+(1, 5, 'membro'),
+
+(2, 2, 'organizzatore'),
+(2, 4, 'membro'),
+(2, 6, 'membro'),
+
+(3, 3, 'organizzatore'),
+(3, 7, 'membro'),
+(3, 8, 'membro');
+
+INSERT INTO Bacheca (gruppo_id, utente_id, messaggio) VALUES
+(1, 1, 'Ragazzi, chi viene al concerto rock? Ci troviamo prima per un aperitivo?'),
+(1, 3, 'Ottima idea! Dove ci troviamo?'),
+(1, 5, 'Io porto qualche amico, ci vediamo lì!'),
+
+(2, 2, 'Il Festival del Cinema sta per iniziare! Quali film volete vedere?'),
+(2, 4, 'Io punto ai documentari, sembrano interessanti.'),
+(2, 6, 'Qualcuno sa dove comprare i biglietti scontati?'),
+
+(3, 3, 'Serata jazz in arrivo! Chi vuole condividere il taxi?'),
+(3, 7, 'Io ci sto! Qualcuno ha già i biglietti?'),
+(3, 8, 'Io li ho presi ieri, vi consiglio di affrettarvi!');
+
+            </code></pre>
+
+
+            <h3 style="margin-top: 60px;">Screenshot</h3>
+            <img src="login.PNG" alt="Screenshot del gestionale" class="project-img">
+            <img src="eventi.PNG" alt="Screenshot del gestionale" class="project-img">
+            <img src="pagamento.PNG" alt="Screenshot del gestionale" class="project-img">
+            </div>
+        </div>
+        
+        <br><br>
+        <a href="index.html#progetti" class="project-link">&larr; Torna ai progetti</a>
+    </section>
+
+    <footer><p>© 2026 Federico De Giovanni</p></footer>
+    <script src="script.js"></script>
+</body>
+</html>

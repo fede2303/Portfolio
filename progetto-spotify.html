@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moodify Pro - Workout Music Assistant</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1><a href="index.html" style="text-decoration:none; color:inherit;">DevStudent<span>.</span></a></h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><button id="theme-toggle" style="background:none; border:none; cursor:pointer; font-size:1.2rem;">☀️</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="container" style="padding: 50px 0;">
+        <h2 style="font-size: 2.5rem; margin-bottom: 10px;">Moodify</h2>
+        <div class="tags" style="margin-bottom: 30px;">
+            <span>Python</span> <span>Spotify API</span> <span>CustomTkinter</span> <span>Multithreading</span>
+        </div>
+
+        <div class="project-details">
+            <h3>Il Problema</h3>
+            <p>Durante le sessioni di allenamento ad alta intensità, la gestione manuale della musica e dei tempi di recupero sullo smartphone è fonte di distrazione e interruzioni. Ho sviluppato <strong>Moodify Pro</strong> per centralizzare il controllo del workout su una singola interfaccia desktop "zero-distraction".</p>
+            
+            <br>
+            
+            <h3>Scarica Progetto</h3>
+<p>Scarica il pacchetto completo contenente lo script Python e gli asset grafici necessari:</p>
+<a href="Moodify.exe" download class="btn" style="margin-top: 10px; display:inline-block;">
+    💾 Scarica Moodify.exe
+</a>
+
+            <h3 style="margin-top: 60px;">1. Integrazione API & OAuth2</h3>
+            <p>Utilizzo della libreria <code>Spotipy</code> per l'autenticazione sicura e il filtraggio dinamico della libreria utente in base a mood specifici:</p>
+            
+            <pre class="code-box"><code>
+# Integrazione Spotipy con protocollo OAuth2
+sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
+    client_id=CLIENT_ID, 
+    client_secret=CLIENT_SECRET,
+    redirect_uri=REDIRECT_URI, 
+    scope="user-library-read"
+))
+
+# Filtraggio asincrono basato su keyword musicali
+if any(k in track_name.lower() for k in FILTRI["pesi"]):
+    brani_compatibili.append(track)
+            </code></pre>
+
+            <h3 style="margin-top: 40px;">2. Gestione del Workout Timer</h3>
+            <p>Implementazione di un timer di recupero multithread per non bloccare l'interfaccia grafica (GUI) durante il countdown:</p>
+
+            <pre class="code-box"><code>
+# Logica del Timer con threading per mantenere la UI reattiva
+def countdown(self):
+    while self.seconds_left > 0 and self.timer_running:
+        time.sleep(1)
+        self.seconds_left -= 1
+        self.update_timer_label()
+    
+    if self.seconds_left == 0:
+        self.notify_user("GO! 🔥")
+            </code></pre>
+
+            <h3 style="margin-top: 60px;">Interfaccia Utente (Dark Mode)</h3>
+            <p>L'app presenta un design moderno in Dark Mode ispirato a Spotify, ottimizzato per la leggibilità durante l'attività fisica:</p>
+            <img src="Moodify.png" alt="Moodify Pro Interface" class="project-img" style="border-radius: 15px; border: 1px solid #282828;">
+            
+            <h3 style="margin-top: 40px;">Caratteristiche Tecniche</h3>
+            <ul>
+                <li><strong>Smart Filtering:</strong> Algoritmo di scansione istantanea della libreria "Brani che ti piacciono".</li>
+                <li><strong>Workout Timer:</strong> Preset da 60s, 120s e 180s con feedback visivo.</li>
+                <li><strong>Dynamic Image Processing:</strong> Gestione delle copertine degli album tramite Pillow e caricamento asincrono degli asset.</li>
+            </ul>
+        </div>
+        
+        <br><br>
+        <a href="index.html#progetti" class="project-link">&larr; Torna ai progetti</a>
+    </section>
+
+    <footer><p>© 2026 Federico De Giovanni</p></footer>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataGain - Fitness Predictive Analytics</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1><a href="index.html" style="text-decoration:none; color:inherit;">DevStudent<span>.</span></a></h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><button id="theme-toggle" style="background:none; border:none; cursor:pointer; font-size:1.2rem;">☀️</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="container" style="padding: 50px 0;">
+        <h2 style="font-size: 2.5rem; margin-bottom: 10px;">DataGain</h2>
+        <div class="tags" style="margin-bottom: 30px;">
+            <span>Python</span> <span>CustomTkinter</span> <span>Matplotlib</span> <span>Data Analysis</span>
+        </div>
+
+        <div class="project-details">
+            <h3>Il Problema</h3>
+            <p>Monitorare il peso corporeo senza contestualizzare il trend può portare a decisioni errate nella dieta. <strong>DataGain Pro</strong> nasce per eliminare l'incertezza, offrendo uno strumento di analisi predittiva che stima la data di raggiungimento dell'obiettivo (Bulk/Cut) basandosi sulla velocità reale di variazione del peso.</p>
+            
+            <br>
+            
+            <h3>Scarica Progetto</h3>
+            <p>Scarica il pacchetto completo contenente l'eseguibile e i file sorgente per l'analisi dei dati:</p>
+            <a href="DataGainPro.exe" download class="btn" style="margin-top: 10px; display:inline-block;">
+                💾 Scarica DataGainPro.Exe
+            </a>
+
+            <h3 style="margin-top: 60px;">1. Analisi Predittiva del Trend</h3>
+            <p>Il software non si limita a loggare i dati, ma calcola la velocità media giornaliera e proietta il trend nel futuro per stimare il traguardo:</p>
+            
+            <pre class="code-box"><code>
+# Calcolo della velocità di crociera e proiezione temporale
+velocita_giornaliera = guadagno_totale / giorni_passati
+kg_da_percorrere = target - media_attuale
+giorni_rimanenti = int(abs(kg_da_percorrere / velocita_giornaliera))
+
+# Calcolo data stimata del traguardo
+data_traguardo = datetime.now() + timedelta(days=giorni_rimanenti)
+            </code></pre>
+
+            <h3 style="margin-top: 40px;">2. Ingegneria della Nutrizione</h3>
+            <p>Implementazione della formula scientifica di <strong>Mifflin-St Jeor</strong> per il calcolo del metabolismo basale (BMR) e ripartizione dinamica dei macronutrienti:</p>
+
+            <pre class="code-box"><code>
+# Calcolo BMR e target calorico dinamico
+bmr = (10 * peso) + (6.25 * altezza) - (5 * eta) + 5
+tdee = bmr * 1.55  # Moltiplicatore attività moderata
+
+# Ripartizione Macronutrienti (Ingegneria Alimentare)
+proteine = int(peso * 2.2)
+grassi = int(peso * 0.8)
+carboidrati = int((calorie_target - (proteine * 4) - (grassi * 9)) / 4)
+            </code></pre>
+
+            <h3 style="margin-top: 60px;">Dashboard & Data Visualization</h3>
+            <p>L'interfaccia è strutturata come una dashboard moderna con sidebar fissa e visualizzazione grafica del trend tramite integrazione di <code>Matplotlib</code>:</p>
+            <img src="DataGain.png" alt="DataGain Pro Interface" class="project-img" style="border-radius: 15px; border: 1px solid #282828; margin-top: 20px;">
+            
+            <h3 style="margin-top: 40px;">Caratteristiche Tecniche</h3>
+            <ul>
+                <li><strong>Predictive Analytics:</strong> Algoritmo che stima la data esatta del raggiungimento del target peso (es. 78kg).</li>
+                <li><strong>Data Visualization:</strong> Generazione istantanea di grafici lineari del peso rispetto alla linea obiettivo.</li>
+                <li><strong>Smart Export:</strong> Funzione di esportazione dei dati storici in formato CSV per l'analisi esterna su Excel.</li>
+                <li><strong>Configurazione Dinamica:</strong> Gestione di obiettivi multipli (Bulk, Cut, Mantenimento) con salvataggio persistente in JSON.</li>
+            </ul>
+        </div>
+        
+        <br><br>
+        <a href="index.html#progetti" class="project-link">&larr; Torna ai progetti</a>
+    </section>
+
+    <footer><p>© 2026 Federico De Giovanni</p></footer>
+    <script src="script.js"></script>
+</body>
+</html>

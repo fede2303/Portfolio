@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisi Pixel | Dettagli</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1><a href="index.html" style="text-decoration:none; color:inherit;">DevStudent<span>.</span></a></h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><button id="theme-toggle" style="background:none; border:none; cursor:pointer; font-size:1.2rem;">☀️</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="container" style="padding: 50px 0;">
+        <h2 style="font-size: 2.5rem; margin-bottom: 10px;">Analisi Pixel Immagine</h2>
+        <div class="tags" style="margin-bottom: 30px;">
+            <span>JavaScript</span> <span>Thread</span> <span>Scheduler</span>
+        </div>
+
+        <div class="project-details">
+            <h3>Il Problema</h3>
+            <p>L'obiettivo era sviluppare un algoritmo efficiente in grado di scansionare un'immagine caricata dall'utente e individuare la più grande area contigua di pixel dello stesso colore. La complessità risiedeva nella gestione della memoria e nel tempo di esecuzione, risolta parallelizzando il lavoro tramite Thread.</p>
+            
+            <br>
+            
+            <h3>Codice Sorgente</h3>
+            <p>Scarica il progetto completo per vedere la gestione dello scheduler:</p>
+            <a href="SO.zip/" download class="btn" style="margin-top: 10px; display:inline-block;">
+                💾 Scarica Progetto
+            </a>
+
+            <h3 style="margin-top: 60px;">1. Logica dello Scheduler</h3>
+            <p>Snippet che mostra come vengono gestiti i task in parallelo:</p>
+            
+            <pre class="code-box"><code>
+/* * Gestore dei Thread (Scheduler)
+ * Suddivide l'immagine in blocchi e assegna l'analisi a Worker paralleli
+ */
+class ImageAnalysisScheduler {
+    constructor(maxThreads = 4) {
+        this.workerPool = [];
+        this.maxThreads = maxThreads;
+    }
+
+    startAnalysis(imageData) {
+        // Creiamo un Worker separato per non bloccare la UI principale
+        const worker = new Worker('pixel-worker.js');
+
+        // Inviamo i dati grezzi dell'immagine al thread
+        worker.postMessage({
+            pixels: imageData.data,
+            width: imageData.width,
+            height: imageData.height
+        });
+
+        // Ascoltiamo la risposta asincrona
+        worker.onmessage = (e) => {
+            const { maxSequence, color } = e.data;
+            console.log(`Sequenza trovata: ${maxSequence} pixel di colore ${color}`);
+            this.highlightResult(e.data.coordinates);
+        };
+    }
+}
+            </code></pre>
+
+            <h3 style="margin-top: 40px;">2. Algoritmo di Ricerca (Flood Fill)</h3>
+            <p>La logica ricorsiva per trovare i pixel adiacenti:</p>
+
+            <pre class="code-box"><code>
+/*
+ * Algoritmo Flood Fill (Breadth-First Search)
+ * Trova l'area contigua più grande di pixel dello stesso colore
+ */
+function findLargestRegion(pixels, startX, startY, width) {
+    let queue = [[startX, startY]]; // Coda per i pixel da visitare
+    let count = 0;
+    const targetColor = getPixelColor(pixels, startX, startY);
+    
+    // Matrice per tenere traccia dei visitati per evitare loop
+    let visited = new Set(); 
+
+    while (queue.length > 0) {
+        let [x, y] = queue.shift(); // Prendi il prossimo pixel
+        let key = `${x},${y}`;
+
+        // Se fuori dai bordi, già visitato o colore diverso -> salta
+        if (x < 0 || x >= width || visited.has(key)) continue;
+        if (getPixelColor(pixels, x, y) !== targetColor) continue;
+
+        // Pixel valido: aggiungi al conteggio
+        visited.add(key);
+        count++;
+
+        // Aggiungi i 4 vicini (Sopra, Sotto, Sinistra, Destra) alla coda
+        queue.push([x + 1, y], [x - 1, y], [x, y + 1], [x, y - 1]);
+    }
+    
+    return count; // Ritorna la dimensione dell'area trovata
+}
+            </code></pre>
+
+            <h3 style="margin-top: 60px;">Screenshot</h3>
+            <img src="scritta.PNG" alt="Analisi Pixel" class="project-img">
+            <img src="input.PNG" alt="Analisi Pixel" class="project-img">
+            <img src="output.PNG" alt="Analisi Pixel" class="project-img">
+        </div>
+        
+        <br><br>
+        <a href="index.html#progetti" class="project-link">&larr; Torna ai progetti</a>
+    </section>
+
+    <footer><p>© 2026 Federico De Giovanni</p></footer>
+    <script src="script.js"></script>
+</body>
+</html>

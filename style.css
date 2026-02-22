@@ -1,0 +1,265 @@
+html {
+    scroll-behavior: smooth;
+}
+
+/* 1. VARIABILI GLOBALI */
+:root {
+    --bg-color: #1a1a2e;
+    --text-color: #e0e0e0;
+    --card-bg: #16213e;
+    --accent-color: #1DB954; /* Cambiato in verde Spotify/DataGain per coerenza */
+    --header-bg: #16213e;
+    --tag-bg: #0f3460;
+}
+
+.light-mode {
+    --bg-color: #f4f4f4;
+    --text-color: #333333;
+    --card-bg: #ffffff;
+    --accent-color: #158a3d;
+    --header-bg: #ffffff;
+    --tag-bg: #e0e0e0;
+}
+
+/* 2. RESET E BASE */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    transition: background-color 0.4s, color 0.4s;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+a { text-decoration: none; color: inherit; transition: 0.3s; }
+
+/* 3. HEADER (DINAMICO) */
+header {
+    background: var(--header-bg);
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    transition: background 0.4s;
+}
+
+header h1 span { color: var(--accent-color); }
+
+header ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    align-items: center;
+}
+
+header ul li a:hover { color: var(--accent-color); }
+
+/* 4. HERO SECTION */
+#hero {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* Sfondo scuro fisso per leggibilità */
+    background: linear-gradient(rgba(26, 26, 46, 0.7), rgba(26, 26, 46, 0.7)), url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1950&q=80');
+    background-size: cover;
+    background-position: center;
+}
+
+#hero h2, #hero p { color: #ffffff !important; }
+.highlight { color: var(--accent-color); }
+
+.btn {
+    display: inline-block;
+    background: var(--accent-color);
+    color: white !important;
+    padding: 12px 30px;
+    margin-top: 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover { 
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 5px 15px rgba(29, 185, 84, 0.4);
+}
+
+/* --- NUOVA SEZIONE CHI SONO (PROFILO) --- */
+
+.profile-header {
+    display: flex;
+    align-items: center; /* Centra verticalmente testo e foto */
+    gap: 40px;
+    margin-top: 50px;
+    margin-bottom: 60px;
+}
+
+.profile-pic {
+    width: 250px;           /* DIMENSIONE FISSA: Cambia qui per ingrandire/rimpicciolire */
+    height: 250px;          /* Deve essere uguale alla width */
+    object-fit: cover;      /* Taglia la foto al centro senza deformarla */
+    border-radius: 50%;     /* La rende un cerchio perfetto */
+    border: 4px solid var(--accent-color);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    flex-shrink: 0;         /* Impedisce alla foto di schiacciarsi */
+}
+
+.profile-bio {
+    flex: 1;
+}
+
+.profile-bio h2 {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    font-weight: bold;
+    opacity: 0.8;
+    margin-bottom: 20px;
+    display: block; /* Mette il sottotitolo su una riga nuova */
+}
+
+/* --- SEZIONE CV (ISTRUZIONE/SKILLS) --- */
+
+.cv-section {
+    margin-bottom: 40px;
+    padding: 25px;
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.cv-section h3 {
+    color: var(--accent-color);
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--accent-color);
+    display: inline-block;
+}
+
+.education-item {
+    margin-bottom: 20px;
+    border-left: 3px solid var(--accent-color);
+    padding-left: 15px;
+}
+
+.exams {
+    font-size: 0.85rem;
+    background: rgba(0,0,0,0.2);
+    padding: 8px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+/* Modifica al responsive per la foto su Mobile */
+@media (max-width: 768px) {
+    .profile-header {
+        flex-direction: column; /* Foto sopra, testo sotto */
+        text-align: center;
+        gap: 20px;
+    }
+
+    .profile-pic {
+        width: 180px; /* Più piccola su smartphone */
+        height: 180px;
+    }
+}
+
+
+/* 5. PROGETTI E CARD (ANIMATE) */
+#progetti { padding: 80px 0; }
+
+.grid-progetti {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.card {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 12px;
+    border-bottom: 4px solid var(--accent-color);
+    transition: transform 0.1s ease, box-shadow 0.3s ease, background 0.4s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Effetto Hover "Ingegneristico" */
+.card:hover {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.card h4 { margin-bottom: 15px; font-size: 1.4rem; color: var(--accent-color); }
+.card p { font-size: 0.95rem; opacity: 0.9; margin-bottom: 20px; }
+
+/* Tag Badge */
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.tags span {
+    background: var(--tag-bg);
+    font-size: 0.75rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.card-center { grid-column: 2; }
+
+/* 6. CONTATTI E FOOTER */
+.contact-box {
+    background-color: var(--card-bg);
+    padding: 50px;
+    border-radius: 20px;
+    text-align: center;
+    transition: background 0.4s;
+}
+
+footer {
+    text-align: center;
+    padding: 40px;
+    background: var(--header-bg);
+    margin-top: 60px;
+}
+
+/* 7. UTILITY PER IL CODICE */
+.code-box {
+    background-color: #0d1117;
+    color: #c9d1d9;
+    padding: 20px;
+    border-radius: 8px;
+    font-family: 'Consolas', monospace;
+    border: 1px solid #30363d;
+    margin: 20px 0;
+}
+
+/* 8. RESPONSIVE */
+@media (max-width: 992px) {
+    .grid-progetti { grid-template-columns: repeat(2, 1fr); }
+    .card-center { grid-column: auto; }
+}
+
+@media (max-width: 768px) {
+    .grid-progetti { grid-template-columns: 1fr; }
+    .profile-header { justify-content: center; text-align: center; }
+}
