@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Federico De Giovanni</title>
+    <title>Federico De Giovanni | Portfolio</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
         <div class="container">
-            <h1><a href="index.html" style="text-decoration:none; color:inherit;">DevStudent<span>.</span></a></h1>
+            <h1><a href="index.html" class="logo-link">DevStudent<span>.</span></a></h1>
             <nav>
                 <ul>
                     <li><a href="chi-sono.html">Chi Sono</a></li> 
-                    <li><a href="index.html#progetti">Progetti</a></li>
-                    <li><a href="index.html#contatti">Contatti</a></li>
-                    <li><button id="theme-toggle" style="background:none; border:none; cursor:pointer; font-size:1.2rem;">☀️</button></li>
+                    <li><a href="#progetti">Progetti</a></li>
+                    <li><a href="#contatti">Contatti</a></li>
+                    <li><button id="theme-toggle" title="Cambia tema">☀️</button></li>
                 </ul>
             </nav>
         </div>
@@ -25,85 +25,88 @@
     <section id="hero">
         <div class="hero-content">
             <h2>Ciao, sono <span class="highlight">Federico De Giovanni</span></h2>
-            <p>Studente di Ingegneria Informatica presso l'Università di Pavia</p>
+            <p>Studente di Ingegneria Informatica & Developer.</p>
             <a href="#progetti" class="btn">Vedi i miei lavori</a>
         </div>
     </section>
 
-    <section id="progetti" class="container">
-        <h3>I miei Progetti</h3>
-        <div class="grid-progetti">
-    
-            <div class="card">
-                <h4>E-Commerce di Biglietti</h4>
-                <p>Un sistema per la vendita di biglietti per eventi con possibilità di creare gruppi di persone.                                                                    </p>
-                <div class="tags">
-                    <span>JavaScript</span> <span>MySQL</span> <span>Eclipse</span>
+    <main class="container">
+        <section id="progetti">
+            <h3>I miei Progetti</h3>
+            <div class="grid-progetti">
+        
+                <div class="card">
+                    <h4>E-Commerce di Biglietti</h4>
+                    <p>Un sistema per la vendita di biglietti per eventi con possibilità di creare gruppi di persone.</p>
+                    <div class="tags">
+                        <span>JavaScript</span> <span>MySQL</span> <span>Eclipse</span>
+                    </div>
+                    <a href="progetto-biglietti.html" class="project-link">Vedi Dettagli &rarr;</a>
                 </div>
-                <a href="progetto-biglietti.html" class="project-link">Vedi Dettagli & Codice &rarr;</a>
-            </div>
 
-            <div class="card">
-                <h4>Analisi Pixel Immagine</h4>
-                <p>Sistema che calcola la più grande sequenza di pixel dello stesso colore usando Thread.</p>
-                <div class="tags">
-                    <span>JavaScript</span> <span>Thread</span> <span>Scheduler</span>
+                <div class="card">
+                    <h4>Analisi Pixel Immagine</h4>
+                    <p>Algoritmo che calcola la più grande sequenza di pixel dello stesso colore usando i Thread.</p>
+                    <div class="tags">
+                        <span>Java</span> <span>Thread</span> <span>Scheduling</span>
+                    </div>
+                    <a href="progetto-pixel.html" class="project-link">Vedi Dettagli &rarr;</a>
                 </div>
-                <a href="progetto-pixel.html" class="project-link">Vedi Dettagli & Codice &rarr;</a>
-            </div>
 
-            <div class="card">
-                <h4>Moodify</h4>
-                <p>Script Python per creare playlist Spotify basate sul'allenamneto che l'utente vuole fare in palestra.                                                                                     </p>
-                <div class="tags">
-                    <span>Python</span>
+                <div class="card">
+                    <h4>Moodify</h4>
+                    <p>Script Python per creare playlist Spotify personalizzate in base alla tua scheda di allenamento.</p>
+                    <div class="tags">
+                        <span>Python</span> <span>Spotify API</span>
+                    </div>
+                    <a href="progetto-spotify.html" class="project-link">Vedi Dettagli &rarr;</a>
                 </div>
-                <a href="progetto-spotify.html" class="project-link">Vedi Dettagli & Codice &rarr;</a>
+
+                <div class="card card-center"> 
+                    <h4>DataGain Pro</h4>
+                    <p>Software di Predictive Analytics che stima il raggiungimento del target peso tramite algoritmi di trend lineare.</p>
+                    <div class="tags">
+                        <span>Python</span> <span>Tkinter</span> <span>Matplotlib</span> 
+                    </div>
+                    <a href="progetto-datagain.html" class="project-link">Vedi Dettagli &rarr;</a>
+                </div>
+
             </div>
+        </section>
 
-            <div class="card card-center"> <h4>DataGain Pro</h4>
-    <p>Software di Predictive Analytics per il fitness che stima il raggiungimento del target peso tramite algoritmi di trend lineare.</p>
-    <div class="tags">
-        <span>Python</span> <span>CustomTkinter</span> <span>Matplotlib</span> 
-    </div>
-    <a href="progetto-datagain.html" class="project-link">Vedi Dettagli & Codice &rarr;</a>
-</div>
-
-        </div>
-    </section>
-
-    <section id="contatti" class="container">
-        <div class="contact-box">
-            <h3>Per Contattarmi?</h3>
-            <p>Sono sempre alla ricerca di nuove sfide. Scrivimi!</p>
-            <div class="social-links">
-    <a href="mailto:fededegio2003@gmail.com" class="btn">Inviami una Email</a> <div class="links-row">
-        <a href="https://www.linkedin.com/in/tuo-profilo/" target="_blank">LinkedIn</a> 
-        <span>|</span> 
-        <a href="https://github.com/fede2303" target="_blank">GitHub</a>
-    </div>
-</div>
-        </div>
-    </section>
+        <section id="contatti">
+            <div class="contact-box">
+                <h3>Collaboriamo?</h3>
+                <p>Sono sempre alla ricerca di nuove sfide. Scrivimi!</p>
+                <div class="social-links">
+                    <a href="mailto:fededegio2003@gmail.com" class="btn">Invia una Email</a> 
+                    <div class="links-row">
+                        <a href="https://www.linkedin.com/in/tuo-profilo/" target="_blank">LinkedIn</a> 
+                        <span>|</span> 
+                        <a href="https://github.com/fede2303" target="_blank">GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <footer>
         <p>Realizzato con passione e caffeina. © 2026</p>
     </footer>
 
     <script src="script.js"></script>
-
     <script src="https://unpkg.com/scrollreveal"></script>
-<script>
-    ScrollReveal().reveal('.card', { 
-        delay: 200, 
-        distance: '50px',
-        origin: 'bottom',
-        duration: 1000,
-        interval: 200 
-    });
-    ScrollReveal().reveal('#hero h2', { delay: 100, origin: 'left', distance: '100px' });
-</script>
+    <script>
+        // Configurazione animazioni a comparsa
+        ScrollReveal().reveal('.card', { 
+            delay: 200, 
+            distance: '50px',
+            origin: 'bottom',
+            duration: 1000,
+            interval: 200 
+        });
+        ScrollReveal().reveal('#hero h2', { delay: 100, origin: 'left', distance: '100px' });
+    </script>
 
 </body>
-
 </html>
