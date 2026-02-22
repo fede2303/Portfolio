@@ -1,13 +1,13 @@
+/* --- CONFIGURAZIONE BASE --- */
 html {
     scroll-behavior: smooth;
 }
 
-/* 1. VARIABILI GLOBALI */
 :root {
     --bg-color: #1a1a2e;
     --text-color: #e0e0e0;
     --card-bg: #16213e;
-    --accent-color: #1DB954; /* Cambiato in verde Spotify/DataGain per coerenza */
+    --accent-color: #1DB954; 
     --header-bg: #16213e;
     --tag-bg: #0f3460;
 }
@@ -21,7 +21,6 @@ html {
     --tag-bg: #e0e0e0;
 }
 
-/* 2. RESET E BASE */
 * {
     margin: 0;
     padding: 0;
@@ -34,17 +33,19 @@ body {
     color: var(--text-color);
     line-height: 1.6;
     transition: background-color 0.4s, color 0.4s;
+    overflow-x: hidden; /* Evita lo scroll orizzontale fastidioso */
 }
 
 .container {
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 20px;
+    width: 100%;
 }
 
 a { text-decoration: none; color: inherit; transition: 0.3s; }
 
-/* 3. HEADER (DINAMICO) */
+/* --- HEADER --- */
 header {
     background: var(--header-bg);
     padding: 20px 0;
@@ -53,6 +54,12 @@ header {
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     transition: background 0.4s;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 header h1 span { color: var(--accent-color); }
@@ -66,15 +73,15 @@ header ul {
 
 header ul li a:hover { color: var(--accent-color); }
 
-/* 4. HERO SECTION */
+/* --- HERO SECTION --- */
 #hero {
     height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    /* Sfondo scuro fisso per leggibilità */
-    background: linear-gradient(rgba(26, 26, 46, 0.7), rgba(26, 26, 46, 0.7)), url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1950&q=80');
+    background: linear-gradient(rgba(26, 26, 46, 0.7), rgba(26, 26, 46, 0.7)), 
+                url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1950&q=80');
     background-size: cover;
     background-position: center;
 }
@@ -93,6 +100,7 @@ header ul li a:hover { color: var(--accent-color); }
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
+    max-width: 100%;
 }
 
 .btn:hover { 
@@ -100,46 +108,30 @@ header ul li a:hover { color: var(--accent-color); }
     box-shadow: 0 5px 15px rgba(29, 185, 84, 0.4);
 }
 
-/* --- NUOVA SEZIONE CHI SONO (PROFILO) --- */
-
+/* --- CHI SONO / PROFILO --- */
 .profile-header {
     display: flex;
-    align-items: center; /* Centra verticalmente testo e foto */
+    align-items: center;
     gap: 40px;
     margin-top: 50px;
     margin-bottom: 60px;
 }
 
 .profile-pic {
-    width: 250px;           /* DIMENSIONE FISSA: Cambia qui per ingrandire/rimpicciolire */
-    height: 250px;          /* Deve essere uguale alla width */
-    object-fit: cover;      /* Taglia la foto al centro senza deformarla */
-    border-radius: 50%;     /* La rende un cerchio perfetto */
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 50%;
     border: 4px solid var(--accent-color);
     box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    flex-shrink: 0;         /* Impedisce alla foto di schiacciarsi */
+    flex-shrink: 0;
 }
 
-.profile-bio {
-    flex: 1;
-}
+.profile-bio { flex: 1; }
+.profile-bio h2 { font-size: 2.5rem; color: var(--accent-color); margin-bottom: 10px; }
+.subtitle { font-size: 1.2rem; font-weight: bold; opacity: 0.8; margin-bottom: 20px; display: block; }
 
-.profile-bio h2 {
-    font-size: 2.5rem;
-    color: var(--accent-color);
-    margin-bottom: 10px;
-}
-
-.subtitle {
-    font-size: 1.2rem;
-    font-weight: bold;
-    opacity: 0.8;
-    margin-bottom: 20px;
-    display: block; /* Mette il sottotitolo su una riga nuova */
-}
-
-/* --- SEZIONE CV (ISTRUZIONE/SKILLS) --- */
-
+/* --- SEZIONE CV --- */
 .cv-section {
     margin-bottom: 40px;
     padding: 25px;
@@ -164,29 +156,13 @@ header ul li a:hover { color: var(--accent-color); }
 .exams {
     font-size: 0.85rem;
     background: rgba(0,0,0,0.2);
-    padding: 8px;
+    padding: 10px;
     border-radius: 5px;
     margin-top: 10px;
 }
 
-/* Modifica al responsive per la foto su Mobile */
-@media (max-width: 768px) {
-    .profile-header {
-        flex-direction: column; /* Foto sopra, testo sotto */
-        text-align: center;
-        gap: 20px;
-    }
-
-    .profile-pic {
-        width: 180px; /* Più piccola su smartphone */
-        height: 180px;
-    }
-}
-
-
-/* 5. PROGETTI E CARD (ANIMATE) */
-#progetti { padding: 80px 0; }
-
+/* --- PROGETTI E CARD --- */
+#progetti { padding: 60px 0; }
 .grid-progetti {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -198,22 +174,15 @@ header ul li a:hover { color: var(--accent-color); }
     padding: 30px;
     border-radius: 12px;
     border-bottom: 4px solid var(--accent-color);
-    transition: transform 0.1s ease, box-shadow 0.3s ease, background 0.4s;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.3s;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 }
 
-/* Effetto Hover "Ingegneristico" */
-.card:hover {
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-}
-
+.card:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.2); transform: translateY(-5px); }
 .card h4 { margin-bottom: 15px; font-size: 1.4rem; color: var(--accent-color); }
-.card p { font-size: 0.95rem; opacity: 0.9; margin-bottom: 20px; }
+.card p { font-size: 0.95rem; opacity: 0.9; margin-bottom: 20px; flex-grow: 1; }
 
-/* Tag Badge */
 .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
 .tags span {
     background: var(--tag-bg);
@@ -224,93 +193,83 @@ header ul li a:hover { color: var(--accent-color); }
     border: 1px solid rgba(255,255,255,0.1);
 }
 
-.card-center { grid-column: 2; }
+/* --- IMMAGINI E CODICE (IL FIX PER MOBILE) --- */
+.project-img {
+    max-width: 100% !important;
+    height: auto !important;
+    display: block;
+    margin: 30px auto;
+    border-radius: 10px;
+}
 
-/* 6. CONTATTI E FOOTER */
+.code-box {
+    background-color: #0d1117;
+    color: #c9d1d9;
+    padding: 20px;
+    border-radius: 8px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    margin: 25px 0;
+    overflow-x: auto; /* Barra scorrimento orizzontale solo se serve */
+    width: 100%;
+    display: block;
+}
+
+.code-box code {
+    white-space: pre;
+    font-size: 13px;
+}
+
+/* --- CONTATTI E FOOTER --- */
 .contact-box {
     background-color: var(--card-bg);
-    padding: 50px;
+    padding: 50px 20px;
     border-radius: 20px;
     text-align: center;
-    transition: background 0.4s;
 }
 
 footer {
     text-align: center;
     padding: 40px;
     background: var(--header-bg);
-    margin-top: 60px;
 }
 
-/* 7. UTILITY PER IL CODICE */
-.code-box {
-    background-color: #0d1117;
-    color: #c9d1d9;
-    padding: 20px;
-    border-radius: 8px;
-    font-family: 'Consolas', monospace;
-    border: 1px solid #30363d;
-    margin: 20px 0;
-}
+/* --- RESPONSIVE DESIGN --- */
 
-/* 8. RESPONSIVE */
+/* Tablet */
 @media (max-width: 992px) {
     .grid-progetti { grid-template-columns: repeat(2, 1fr); }
     .card-center { grid-column: auto; }
 }
 
+/* Mobile */
 @media (max-width: 768px) {
-    .grid-progetti { grid-template-columns: 1fr; }
-    .profile-header { justify-content: center; text-align: center; }
+    body { padding-top: 0; }
+    
+    .container { padding: 0 20px; }
 
-}
-
-/* Stile per le immagini nei dettagli dei progetti */
-.project-img {
-    max-width: 100%;    /* Impedisce all'immagine di uscire dallo schermo */
-    height: auto;       /* Mantiene le proporzioni */
-    display: block;
-    margin: 20px auto;  /* Le centra con un po' di spazio sopra e sotto */
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
-
-.code-box {
-    max-width: 100%;     /* Forza il box a stare dentro i bordi del telefono */
-    overflow-x: auto;    /* Se il codice è lungo, aggiunge una barra di scorrimento interna */
-    white-space: pre;    /* Mantiene la formattazione del codice */
-    word-wrap: normal;
-    font-size: 14px;     /* Riduce leggermente il testo per farlo stare meglio */
-    padding: 15px;
-    background-color: #0d1117;
-    border-radius: 8px;
-}
-
-/* --- OTTIMIZZAZIONI PER MOBILE --- */
-@media (max-width: 768px) {
-    /* Riduce lo spazio ai lati del sito */
-    .container {
-        padding: 0 15px;
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
     }
 
-    /* Fa sì che i progetti stiano uno sotto l'altro in colonna */
-    .grid-progetti {
-        grid-template-columns: 1fr !important; 
-    }
-
-    /* Riduce la dimensione dei titoli grandi */
-    #hero h2 {
-        font-size: 1.8rem;
-    }
-
-    /* La foto profilo si rimpicciolisce un po' */
     .profile-pic {
         width: 180px;
         height: 180px;
     }
 
-    /* Rimuove i margini forzati se avevi usato la classe card-center */
-    .card-center {
-        grid-column: auto !important;
+    .grid-progetti {
+        grid-template-columns: 1fr !important;
+    }
+
+    #hero h2 { font-size: 2rem; }
+
+    .cv-section { padding: 15px; }
+    
+    .btn { width: 100%; text-align: center; }
+
+    .code-box {
+        padding: 15px;
+        margin: 15px 0;
     }
 }
