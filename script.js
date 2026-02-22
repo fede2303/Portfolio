@@ -1,25 +1,19 @@
-// 1. Selezioniamo gli elementi dal DOM (la struttura della pagina)
+// --- 1. GESTIONE TEMA (CHIARO/SCURO) ---
 const toggleButton = document.getElementById('theme-toggle');
 const body = document.body;
 
-// 2. Aggiungiamo un "ascoltatore di eventi" (Event Listener)
-// Quando l'utente clicca ("click") sul bottone, eseguiamo questa funzione anonima
 toggleButton.addEventListener('click', () => {
-    
-    // 3. Aggiungiamo o togliamo la classe 'light-mode' al body
     body.classList.toggle('light-mode');
 
-    // 4. Cambiamo l'icona del bottone in base al tema
+    // Cambiamo l'icona del bottone in base al tema
     if (body.classList.contains('light-mode')) {
-        toggleButton.textContent = '🌙'; // Se è chiaro, mostra la luna
+        toggleButton.textContent = '🌙'; 
     } else {
-        toggleButton.textContent = '☀️'; // Se è scuro, mostra il sole
+        toggleButton.textContent = '☀️'; 
     }
 });
 
-// DEBUG per ingegneri:
-console.log("Script caricato correttamente! Controlla la console del browser (F12)");
-
+// --- 2. EFFETTO 3D CARD (MOUSEMOVE) ---
 const cards = document.querySelectorAll('.card');
 
 cards.forEach(card => {
@@ -40,23 +34,25 @@ cards.forEach(card => {
     card.addEventListener('mouseleave', () => {
         card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
     });
-
 });
 
+// --- 3. HAMBURGER MENU (MOBILE) ---
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('nav-menu');
 
 // Apre/Chiude il menu cliccando sulle lineette
 hamburger.addEventListener('click', () => {
     navMenu.classList.toggle('active');
-    
-    // Animazione opzionale delle lineette (X)
-    hamburger.classList.toggle('open');
+    hamburger.classList.toggle('open'); // Questo attiva l'animazione a X
 });
 
-// Chiude il menu quando clicchi su un link (opzionale ma consigliato)
+// Chiude il menu quando clicchi su un link
 document.querySelectorAll('nav ul li a').forEach(link => {
     link.addEventListener('click', () => {
         navMenu.classList.remove('active');
+        hamburger.classList.remove('open'); // Reset delle lineette dopo il click
     });
 });
+
+// DEBUG
+console.log("Portfolio Script: Integrità verificata. UI pronta.");
