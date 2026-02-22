@@ -33,14 +33,13 @@ body {
     color: var(--text-color);
     line-height: 1.6;
     transition: background-color 0.4s, color 0.4s;
-    overflow-x: hidden; /* Evita lo scroll orizzontale fastidioso */
+    overflow-x: hidden; /* Impedisce lo scroll orizzontale di tutta la pagina */
 }
 
 .container {
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 20px;
-    width: 100%;
 }
 
 a { text-decoration: none; color: inherit; transition: 0.3s; }
@@ -48,7 +47,7 @@ a { text-decoration: none; color: inherit; transition: 0.3s; }
 /* --- HEADER --- */
 header {
     background: var(--header-bg);
-    padding: 20px 0;
+    padding: 15px 0;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -60,6 +59,7 @@ header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap; /* Permette ai link di andare a capo se non c'è spazio */
 }
 
 header h1 span { color: var(--accent-color); }
@@ -67,7 +67,7 @@ header h1 span { color: var(--accent-color); }
 header ul {
     display: flex;
     list-style: none;
-    gap: 20px;
+    gap: 15px;
     align-items: center;
 }
 
@@ -100,7 +100,6 @@ header ul li a:hover { color: var(--accent-color); }
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
-    max-width: 100%;
 }
 
 .btn:hover { 
@@ -108,7 +107,7 @@ header ul li a:hover { color: var(--accent-color); }
     box-shadow: 0 5px 15px rgba(29, 185, 84, 0.4);
 }
 
-/* --- CHI SONO / PROFILO --- */
+/* --- CHI SONO (PROFILO) --- */
 .profile-header {
     display: flex;
     align-items: center;
@@ -156,7 +155,7 @@ header ul li a:hover { color: var(--accent-color); }
 .exams {
     font-size: 0.85rem;
     background: rgba(0,0,0,0.2);
-    padding: 10px;
+    padding: 8px;
     border-radius: 5px;
     margin-top: 10px;
 }
@@ -174,14 +173,16 @@ header ul li a:hover { color: var(--accent-color); }
     padding: 30px;
     border-radius: 12px;
     border-bottom: 4px solid var(--accent-color);
-    transition: transform 0.2s, box-shadow 0.3s;
+    transition: transform 0.1s ease, box-shadow 0.3s ease, background 0.4s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }
 
-.card:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.2); transform: translateY(-5px); }
+.card:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
 .card h4 { margin-bottom: 15px; font-size: 1.4rem; color: var(--accent-color); }
-.card p { font-size: 0.95rem; opacity: 0.9; margin-bottom: 20px; flex-grow: 1; }
+.card p { font-size: 0.95rem; opacity: 0.9; margin-bottom: 20px; }
 
 .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
 .tags span {
@@ -193,25 +194,24 @@ header ul li a:hover { color: var(--accent-color); }
     border: 1px solid rgba(255,255,255,0.1);
 }
 
-/* --- IMMAGINI E CODICE (IL FIX PER MOBILE) --- */
+/* --- FIX IMMAGINI E CODICE (MOBILE) --- */
 .project-img {
     max-width: 100% !important;
     height: auto !important;
     display: block;
-    margin: 30px auto;
+    margin: 20px auto;
     border-radius: 10px;
 }
 
 .code-box {
     background-color: #0d1117;
     color: #c9d1d9;
-    padding: 20px;
+    padding: 15px;
     border-radius: 8px;
     font-family: 'Consolas', 'Monaco', monospace;
-    margin: 25px 0;
-    overflow-x: auto; /* Barra scorrimento orizzontale solo se serve */
+    margin: 20px 0;
+    overflow-x: auto; /* Permette lo scorrimento solo del codice */
     width: 100%;
-    display: block;
 }
 
 .code-box code {
@@ -225,27 +225,38 @@ header ul li a:hover { color: var(--accent-color); }
     padding: 50px 20px;
     border-radius: 20px;
     text-align: center;
+    transition: background 0.4s;
 }
 
 footer {
     text-align: center;
     padding: 40px;
     background: var(--header-bg);
+    margin-top: 60px;
 }
 
 /* --- RESPONSIVE DESIGN --- */
 
-/* Tablet */
 @media (max-width: 992px) {
     .grid-progetti { grid-template-columns: repeat(2, 1fr); }
     .card-center { grid-column: auto; }
 }
 
-/* Mobile */
 @media (max-width: 768px) {
-    body { padding-top: 0; }
+    .container { padding: 0 15px; }
     
-    .container { padding: 0 20px; }
+    header .container {
+        flex-direction: column; /* Logo sopra, menu sotto */
+        gap: 10px;
+    }
+
+    header ul {
+        gap: 10px;
+    }
+
+    header ul li a {
+        font-size: 0.85rem;
+    }
 
     .profile-header {
         flex-direction: column;
@@ -259,17 +270,15 @@ footer {
     }
 
     .grid-progetti {
-        grid-template-columns: 1fr !important;
+        grid-template-columns: 1fr;
     }
 
-    #hero h2 { font-size: 2rem; }
+    #hero h2 {
+        font-size: 1.8rem;
+    }
 
-    .cv-section { padding: 15px; }
-    
-    .btn { width: 100%; text-align: center; }
-
-    .code-box {
-        padding: 15px;
-        margin: 15px 0;
+    .btn {
+        width: 100%;
+        text-align: center;
     }
 }
