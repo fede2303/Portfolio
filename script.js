@@ -40,4 +40,23 @@ cards.forEach(card => {
     card.addEventListener('mouseleave', () => {
         card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
     });
+
+});
+
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('nav-menu');
+
+// Apre/Chiude il menu cliccando sulle lineette
+hamburger.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    
+    // Animazione opzionale delle lineette (X)
+    hamburger.classList.toggle('open');
+});
+
+// Chiude il menu quando clicchi su un link (opzionale ma consigliato)
+document.querySelectorAll('nav ul li a').forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+    });
 });
