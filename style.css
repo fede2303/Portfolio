@@ -282,3 +282,57 @@ footer {
         text-align: center;
     }
 }
+
+/* --- STILE HAMBURGER --- */
+.hamburger {
+    display: none; /* Nascosto su desktop */
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+    background: none;
+    border: none;
+    z-index: 1001;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-color);
+    transition: 0.3s;
+}
+
+/* --- RESPONSIVE HEADER (MOBILE) --- */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex; /* Mostra le lineette su mobile */
+    }
+
+    nav {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Nasconde il menu a destra */
+        width: 70%;
+        height: 100vh;
+        background-color: var(--header-bg);
+        box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+        transition: 0.4s;
+        padding-top: 100px;
+        z-index: 1000;
+    }
+
+    nav.active {
+        right: 0; /* Fa scivolare il menu dentro lo schermo */
+    }
+
+    nav ul {
+        flex-direction: column; /* Link uno sotto l'altro */
+        gap: 30px;
+        align-items: center;
+    }
+
+    nav ul li a {
+        font-size: 1.2rem;
+    }
+}
+
